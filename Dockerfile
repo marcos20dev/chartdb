@@ -4,19 +4,20 @@ ARG VITE_OPENAI_API_KEY
 ARG VITE_OPENAI_API_ENDPOINT
 ARG VITE_LLM_MODEL_NAME
 ARG VITE_HIDE_BUCKLE_DOT_DEV
-
+ARG VITE_API_URL
 WORKDIR /usr/src/app
 
 COPY package.json package-lock.json ./
 
 RUN npm ci
 
-COPY . .
+
 
 RUN echo "VITE_OPENAI_API_KEY=${VITE_OPENAI_API_KEY}" > .env && \
     echo "VITE_OPENAI_API_ENDPOINT=${VITE_OPENAI_API_ENDPOINT}" >> .env && \
     echo "VITE_LLM_MODEL_NAME=${VITE_LLM_MODEL_NAME}" >> .env && \
-    echo "VITE_HIDE_BUCKLE_DOT_DEV=${VITE_HIDE_BUCKLE_DOT_DEV}" >> .env 
+    echo "VITE_HIDE_BUCKLE_DOT_DEV=${VITE_HIDE_BUCKLE_DOT_DEV}" >> .env \
+    echo "VITE_API_URL=${VITE_API_URL}" >> .env \
 
 RUN npm run build
 
